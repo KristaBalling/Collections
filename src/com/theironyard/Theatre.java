@@ -6,6 +6,19 @@ public class Theatre {
     private final String theatreName;
     public List<Seat> seats = new ArrayList<>();
 
+    static final Comparator<Seat> PRICE_ORDER = new Comparator<Seat>() {
+        @Override
+        public int compare(Seat seat1, Seat seat2) {
+            if(seat1.getPrice() < seat2.getPrice()) {
+                return -1;
+            }else if(seat1.getPrice() > seat2.getPrice()) {
+                return 1;
+            }else {
+                return 0;
+            }
+        }
+    };
+
     public Theatre(String theatreName, int numRows, int seatsPerRow) {
         this.theatreName = theatreName;
 
@@ -80,7 +93,7 @@ public class Theatre {
         }
 
 
-    public class Seat implements Comparable<Seat> {
+    public class Seat implements Comparator<Seat>, com.theironyard.Seat {
         private final String seatNumber;
         private double price;
         private boolean reserved = false;
@@ -89,10 +102,7 @@ public class Theatre {
             this.seatNumber = seatNumber;
         }
 
-        @Override
-        public int compareTo(Seat seat) {
-            return this.seatNumber.compareToIgnoreCase(seat.getSeatNumber());
-        }
+
 
         public boolean reserve() {
             if(!this.reserved) {
@@ -120,6 +130,11 @@ public class Theatre {
 
         public double getPrice() {
             return price;
+        }
+
+        @Override
+        public int compare(Seat o1, Seat o2) {
+            return 0;
         }
     }
 }
