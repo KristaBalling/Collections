@@ -93,7 +93,7 @@ public class Theatre {
         }
 
 
-    public class Seat implements Comparator<Seat>, com.theironyard.Seat {
+    public class Seat implements Comparator<Seat> {
         private final String seatNumber;
         private double price;
         private boolean reserved = false;
